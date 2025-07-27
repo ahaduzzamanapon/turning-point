@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('amount_sent', 10, 2);
             $table->string('transaction_id');
             $table->string('course_interested');
+            $table->string('bach_interested');
             $table->string('facebook_profile_link')->nullable();
             $table->string('representative_name');
             $table->timestamps();

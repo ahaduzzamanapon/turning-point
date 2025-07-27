@@ -19,6 +19,7 @@ class Student extends Model
         'amount_sent',
         'transaction_id',
         'course_interested',
+        'bach_interested',
         'facebook_profile_link',
         'representative_name',
     ];

@@ -128,7 +128,14 @@ const Sidebar = () => {
                         )}
                     </div>
                 )}
-            </nav>
+            {user.permissions && user.permissions.includes('courses_view') && (
+                    <Link
+                        href={route('courses.index')}
+                        className={`flex items-center py-2 px-4 rounded-lg transition duration-200 mt-2 ${isActive('courses.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
+                    >
+                        Courses
+                    </Link>
+                )}</nav>
         </div>
     );
 };

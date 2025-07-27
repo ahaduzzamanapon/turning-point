@@ -57,6 +57,7 @@ export default function StudentIndex({ auth, students }) {
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">batch</th>
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                         </tr>
                                     </thead>
@@ -68,6 +69,7 @@ export default function StudentIndex({ auth, students }) {
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.mobile_number}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.course_interested}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.bach_interested}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                         <Link
                                                             href={route('admin.students.edit', student.id)}

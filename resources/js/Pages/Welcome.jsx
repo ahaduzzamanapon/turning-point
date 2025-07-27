@@ -8,8 +8,7 @@ export default function Welcome({ auth }) {
                 {/* Navigation */}
                 <nav className="bg-white shadow-lg py-4 px-6 flex justify-between items-center sticky top-0 z-50">
                     <div className="flex items-center">
-                        {/* Logo Placeholder */}
-                        <img src="/images/logo.png" alt="Turning Point Job Aid Logo" className="h-12 w-auto mr-3" />
+                      
                         <span className="text-2xl font-extrabold text-red-700">Turning Point Job Aid</span>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -85,7 +84,7 @@ export default function Welcome({ auth }) {
                                 <strong>Head Office:</strong> 12, Akhanda Tower (Lift- 4), Falpatti Goli, Opposite the Mosque, Mirpur- 10, Dhaka
                             </p>
                             <p className="text-gray-700 mb-3 text-lg">
-                                <strong>Call:</strong> <a href="tel:01896224210" className="text-red-600 hover:underline">01896 22 42 10</a> / <a href="tel:01896224211" className="text-red-600 hover:underline">01896 22 42 11</a>
+                                <strong>Call:</strong> <a href="tel:01896224210" className="text-red-600 hover:underline">01896224210</a> / <a href="tel:01896224211" className="text-red-600 hover:underline">01896224211</a>
                             </p>
                             <p className="text-gray-700 mb-3 text-lg">
                                 <strong>Email:</strong> <a href="mailto:turningpointjobaid@gmail.com" className="text-red-600 hover:underline">turningpointjobaid@gmail.com</a>
@@ -93,14 +92,6 @@ export default function Welcome({ auth }) {
                             <p className="text-gray-700 mb-3 text-lg">
                                 <strong>Facebook:</strong> <a href="https://www.facebook.com/turningpointjobaid" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">Turning Point Job Aid Page</a>
                             </p>
-                            <div className="mt-6">
-                                <h3 className="text-2xl font-semibold text-gray-800 mb-3">Payment Methods:</h3>
-                                <ul className="space-y-2 text-gray-700 text-lg">
-                                    <li>Bkash (Merchant): <span className="font-medium text-red-600">01896 22 42 00</span></li>
-                                    <li>Nagad (Merchant): <span className="font-medium text-red-600">01896 22 42 01</span></li>
-                                    <li>Rocket (Send Money): <span className="font-medium text-red-600">018304502805</span></li>
-                                </ul>
-                            </div>
                         </div>
                     </section>
 

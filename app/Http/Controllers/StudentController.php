@@ -24,7 +24,9 @@ class StudentController extends Controller
 
     public function store(StudentRequest $request)
     {
+    
         Student::create($request->validated());
+        //dd($request->all());
 
         return redirect()->route('admin.students.index')->with('success', 'Student registered successfully!');
     }

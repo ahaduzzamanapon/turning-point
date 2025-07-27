@@ -85,7 +85,7 @@ class GenerateCrudCommand extends Command
         $this->addLinkToSidebar($modelName);
 
         $this->info('CRUD generation complete for ' . $modelName);
-
+        shell_exec('npm run build');
         return Command::SUCCESS;
     }
 

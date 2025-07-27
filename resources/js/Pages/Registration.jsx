@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 export default function Registration() {
     const { data, setData, post, processing, errors, reset } = useForm({
         candidate_full_name: '',
+        bach_interested: '',
         mobile_number: '',
         email: '',
         full_address: '',
@@ -20,7 +21,7 @@ export default function Registration() {
         post(route('student.register'), {
             onSuccess: () => {
                 alert('Registration successful! Our team will contact you shortly.');
-                reset();
+                window.location = '/';
             },
             onError: (errors) => {
                 console.error('Registration failed:', errors);
@@ -50,7 +51,14 @@ export default function Registration() {
         "Tania - 01896224205",
         "Bappi Das Sir - 01896224210",
         "Tarek Sir - 01896224200",
-        "Mamun Sir- 01896224211"
+        "Mamun Sir- 01896224211",
+        "other - other"
+    ];
+    const bach = [
+        "২৪ তম ব্যাচ (রাত ৮ টায়) রেগুলার (প্রিলি. + রিটেন)(Upcoming New Batch)",
+        "IT Special Batch-01(Only Bank Job)",
+        "Basic Course (Math +English)-01",
+        "O.G  Crash Course",
     ];
 
     return (
@@ -59,16 +67,33 @@ export default function Registration() {
             <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
                 <div className="max-w-4xl w-full bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                     <div className="flex justify-center mb-6">
-                        {/* Logo Placeholder */}
-                        <img src="/images/logo.png" alt="Turning Point Job Aid Logo" className="h-16 w-auto" />
+                       
                     </div>
                     <h2 className="text-4xl font-bold text-center text-red-700 mb-6">Admission Form</h2>
-                    <p className="text-red-600 text-center mb-4 text-lg">সকল তথ্য ইংরেজিতে দিতে হবে। [ '*' চিহ্নিত সকল অপশন সঠিকভাবে পূরণ করুন]</p>
-                    <p className="text-gray-600 text-center mb-8 text-md">নিম্নের তথ্যগুলো সতর্কতার সাথে পূরণ করুন। তথ্য প্রদানে কোনো সমস্যা হলে 01896 22 42 02/05/06/07/08/10/11 -এ যোগাযোগ করুন।</p>
+                    <p className="text-red-600 text-center mb-4 text-lg">💥 সকল তথ্য ইংরেজিতে দিতে হবে। [ '*'  চিহ্নিত সকল অপশন সঠিকভাবে পূরণ করুন] </p>
+                    <p className="text-gray-600 text-center mb-8 text-md">নিম্নের তথ্যগুলো সতর্কতার সাথে পূরণ করুন। তথ্য প্রদানে কোনো সমস্যা হলে 01896 22 42 02/05/06/07/08/10/11 -এ যোগাযোগ করুন।  আমাদের ফেসবুক লাইভের উন্মুক্ত ক্লাসগুলো ছাড়া অন্যকোনো অনলাইন ক্লাস কর্তৃপক্ষের অনুমতি ব্যতীত রেকডিং করা, হোয়ার্টসঅ্যাপ, ফেসবুক, ইউটিউব বা অন্যকোনো সোশাল মিডিয়ায় শেয়ার করলে ডিজিটাল নিরাপত্তা আইন ২০১৮ অনুযায়ী ব্যবস্থা নেওয়া হবে।</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+
                         <div>
-                            <label htmlFor="candidate_full_name" className="block text-sm font-medium text-gray-700">Candidate Full Name (in English)*</label>
+                            <label htmlFor="course_interested" className="block text-sm font-medium text-gray-700">Choose Your Course <span className="text-red-500">*</span></label>
+                            <select
+                                id="course_interested"
+                                value={data.course_interested}
+                                onChange={(e) => setData('course_interested', e.target.value)}
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
+                                required
+                            >
+                                <option value="">Choose Your Course</option>
+                                {courses.map((course, index) => (
+                                    <option key={index} value={course}>{course}</option>
+                                ))}
+                            </select>
+                            {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="candidate_full_name" className="block text-sm font-medium text-gray-700">Candidate Full Name (in English) <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="candidate_full_name"
@@ -81,7 +106,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="mobile_number" className="block text-sm font-medium text-gray-700">Mobile Number (Used)*</label>
+                            <label htmlFor="mobile_number" className="block text-sm font-medium text-gray-700">📞  Mobile Number (Used) <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="mobile_number"
@@ -94,7 +119,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email :*</label>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">📧 Email <span className="text-red-500">*</span></label>
                             <input
                                 type="email"
                                 id="email"
@@ -107,7 +132,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="full_address" className="block text-sm font-medium text-gray-700">Your full address / সুন্দরবন কুরিয়ারে শিট পাঠানোর ঠিকানা:*</label>
+                            <label htmlFor="full_address" className="block text-sm font-medium text-gray-700">Your full address / সুন্দরবন কুরিয়ারে শিট পাঠানোর ঠিকানা <span className="text-red-500">*</span></label>
                             <textarea
                                 id="full_address"
                                 value={data.full_address}
@@ -120,7 +145,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Your payment methods*</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Your payment methods <span className="text-red-500">*</span></label>
                             <div className="mt-1 space-y-2">
                                 <div className="flex items-center">
                                     <input
@@ -172,7 +197,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="sender_mobile_number" className="block text-sm font-medium text-gray-700">আপনি যে নম্বর থেকে আমাদের বিকাশ মার্চেন্ট/রকেট পার্সোনাল/নগদ পার্সোনাল নম্বর টাকা পাঠিয়েছেন, সেই নাম্বরটি দিন :*</label>
+                            <label htmlFor="sender_mobile_number" className="block text-sm font-medium text-gray-700">আপনি যে নম্বর থেকে আমাদের বিকাশ  মার্চেন্ট/রকেট পার্সোনাল/নগদ পার্সোনাল নম্বর  টাকা পাঠিয়েছেন, সেই নাম্বরটি দিন <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="sender_mobile_number"
@@ -185,7 +210,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="amount_sent" className="block text-sm font-medium text-gray-700">পাঠানো টাকার পরিমাণ উল্লেখ করুন*</label>
+                            <label htmlFor="amount_sent" className="block text-sm font-medium text-gray-700">পাঠানো টাকার পরিমাণ উল্লেখ করুন <span className="text-red-500">*</span></label>
                             <input
                                 type="number"
                                 id="amount_sent"
@@ -198,7 +223,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="transaction_id" className="block text-sm font-medium text-gray-700">রকেটে / নগদ / বিকাশ পাঠানো লেনদেন (Transactions ID) আইডি টি দিন :*</label>
+                            <label htmlFor="transaction_id" className="block text-sm font-medium text-gray-700">রকেটে / নগদ / বিকাশ  পাঠানো লেনদেন (Transactions ID) আইডি টি দিন <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="transaction_id"
@@ -210,27 +235,29 @@ export default function Registration() {
                             {errors.transaction_id && <div className="text-red-500 text-sm mt-1">{errors.transaction_id}</div>}
                         </div>
 
-                        <div>
-                            <label htmlFor="course_interested" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী?*</label>
+                         <div>
+                            <label htmlFor="bach_interested" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী? <span className="text-red-500">*</span></label>
                             <select
-                                id="course_interested"
-                                value={data.course_interested}
-                                onChange={(e) => setData('course_interested', e.target.value)}
+                                id="bach_interested"
+                                value={data.bach_interested}
+                                onChange={(e) => setData('bach_interested', e.target.value)}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
                                 required
                             >
-                                <option value="">Select a Course</option>
-                                {courses.map((course, index) => (
+                                <option value="">ব্যাচ নির্বাচন করুন</option>
+                                {bach.map((course, index) => (
                                     <option key={index} value={course}>{course}</option>
                                 ))}
                             </select>
                             {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
                         </div>
 
+                        
+
                         <div>
-                            <label htmlFor="facebook_profile_link" className="block text-sm font-medium text-gray-700">আপনার ফেসবুক প্রোফাইল লিংক দিন (যেমন: www.facebook.com/turningpointjobaid)*</label>
+                            <label htmlFor="facebook_profile_link" className="block text-sm font-medium text-gray-700">আপনার ফেসবুক প্রোফাইল লিংক দিন (যেমন: www.facebook.com/turningpointjobaid) <span className="text-red-500">*</span></label>
                             <input
-                                type="url"
+                                type="text"
                                 id="facebook_profile_link"
                                 value={data.facebook_profile_link}
                                 onChange={(e) => setData('facebook_profile_link', e.target.value)}
@@ -241,7 +268,7 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="representative_name" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে WhatsApp যুক্ত আছেন বা কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন ?*</label>
+                            <label htmlFor="representative_name" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে  WhatsApp যুক্ত আছেন বা  কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন? <span className="text-red-500">*</span></label>
                             <select
                                 id="representative_name"
                                 value={data.representative_name}

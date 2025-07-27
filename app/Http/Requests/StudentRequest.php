@@ -31,7 +31,8 @@ class StudentRequest extends FormRequest
             'amount_sent' => 'required|numeric',
             'transaction_id' => 'required|string|max:255',
             'course_interested' => 'required|string|max:255',
-            'facebook_profile_link' => 'nullable|url|max:255',
+            'bach_interested' => 'required|string|max:255',
+            'facebook_profile_link' => 'nullable|string|max:255',
             'representative_name' => 'required|string|max:255',
         ];
     }

@@ -13,6 +13,7 @@ export default function StudentEdit({ auth, student }) {
         amount_sent: student.amount_sent || '',
         transaction_id: student.transaction_id || '',
         course_interested: student.course_interested || '',
+        bach_interested: student.bach_interested || '',
         facebook_profile_link: student.facebook_profile_link || '',
         representative_name: student.representative_name || '',
     });
@@ -42,6 +43,13 @@ export default function StudentEdit({ auth, student }) {
         "Mamun Sir- 01896224211"
     ];
 
+    const bach = [
+        "২৪ তম ব্যাচ (রাত ৮ টায়) রেগুলার (প্রিলি. + রিটেন)(Upcoming New Batch)",
+        "IT Special Batch-01(Only Bank Job)",
+        "Basic Course (Math +English)-01",
+        "O.G  Crash Course",
+    ];
+
     const handleSubmit = (e) => {
         e.preventDefault();
         put(route('admin.students.update', student.id));
@@ -59,8 +67,26 @@ export default function StudentEdit({ auth, student }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <form onSubmit={handleSubmit} className="space-y-6">
+
                                 <div>
-                                    <label htmlFor="candidate_full_name" className="block text-sm font-medium text-gray-700">Candidate Full Name (in English)*</label>
+                                    <label htmlFor="course_interested" className="block text-sm font-medium text-gray-700">Choose Your Course <span className="text-red-500">*</span></label>
+                                    <select
+                                        id="course_interested"
+                                        value={data.course_interested}
+                                        onChange={(e) => setData('course_interested', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
+                                        required
+                                    >
+                                        <option value="">Choose Your Course</option>
+                                        {courses.map((course, index) => (
+                                            <option key={index} value={course}>{course}</option>
+                                        ))}
+                                    </select>
+                                    {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
+                                </div>
+
+                                <div>
+                                    <label htmlFor="candidate_full_name" className="block text-sm font-medium text-gray-700">Candidate Full Name (in English) <span className="text-red-500">*</span></label>
                                     <input
                                         type="text"
                                         id="candidate_full_name"
@@ -73,7 +99,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="mobile_number" className="block text-sm font-medium text-gray-700">Mobile Number (Used)*</label>
+                                    <label htmlFor="mobile_number" className="block text-sm font-medium text-gray-700">📞  Mobile Number (Used) <span className="text-red-500">*</span></label>
                                     <input
                                         type="text"
                                         id="mobile_number"
@@ -86,7 +112,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email :*</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">📧 Email <span className="text-red-500">*</span></label>
                                     <input
                                         type="email"
                                         id="email"
@@ -99,7 +125,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="full_address" className="block text-sm font-medium text-gray-700">Your full address / সুন্দরবন কুরিয়ারে শিট পাঠানোর ঠিকানা:*</label>
+                                    <label htmlFor="full_address" className="block text-sm font-medium text-gray-700">Your full address / সুন্দরবন কুরিয়ারে শিট পাঠানোর ঠিকানা <span className="text-red-500">*</span></label>
                                     <textarea
                                         id="full_address"
                                         value={data.full_address}
@@ -112,7 +138,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Your payment methods*</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Your payment methods <span className="text-red-500">*</span></label>
                                     <div className="mt-1 space-y-2">
                                         <div className="flex items-center">
                                             <input
@@ -120,7 +146,6 @@ export default function StudentEdit({ auth, student }) {
                                                 id="bkash"
                                                 name="payment_method"
                                                 value="Bkash (Merchant) (Payment) : 01896 22 42 00"
-                                                checked={data.payment_method === "Bkash (Merchant) (Payment) : 01896 22 42 00"}
                                                 onChange={(e) => setData('payment_method', e.target.value)}
                                                 className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
                                                 required
@@ -133,7 +158,6 @@ export default function StudentEdit({ auth, student }) {
                                                 id="nagad"
                                                 name="payment_method"
                                                 value="Nagad (Merchant) (Payment) : 01896 22 42 01"
-                                                checked={data.payment_method === "Nagad (Merchant) (Payment) : 01896 22 42 01"}
                                                 onChange={(e) => setData('payment_method', e.target.value)}
                                                 className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
                                             />
@@ -145,7 +169,6 @@ export default function StudentEdit({ auth, student }) {
                                                 id="cash_in_hand"
                                                 name="payment_method"
                                                 value="Cash in Hand (Office)"
-                                                checked={data.payment_method === "Cash in Hand (Office)"}
                                                 onChange={(e) => setData('payment_method', e.target.value)}
                                                 className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
                                             />
@@ -157,7 +180,6 @@ export default function StudentEdit({ auth, student }) {
                                                 id="rocket"
                                                 name="payment_method"
                                                 value="Rocket (Send Money) : 018304502805"
-                                                checked={data.payment_method === "Rocket (Send Money) : 018304502805"}
                                                 onChange={(e) => setData('payment_method', e.target.value)}
                                                 className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
                                             />
@@ -168,7 +190,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="sender_mobile_number" className="block text-sm font-medium text-gray-700">আপনি যে নম্বর থেকে আমাদের বিকাশ মার্চেন্ট/রকেট পার্সোনাল/নগদ পার্সোনাল নম্বর টাকা পাঠিয়েছেন, সেই নাম্বরটি দিন :*</label>
+                                    <label htmlFor="sender_mobile_number" className="block text-sm font-medium text-gray-700">আপনি যে নম্বর থেকে আমাদের বিকাশ  মার্চেন্ট/রকেট পার্সোনাল/নগদ পার্সোনাল নম্বর  টাকা পাঠিয়েছেন, সেই নাম্বরটি দিন <span className="text-red-500">*</span></label>
                                     <input
                                         type="text"
                                         id="sender_mobile_number"
@@ -181,7 +203,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="amount_sent" className="block text-sm font-medium text-gray-700">পাঠানো টাকার পরিমাণ উল্লেখ করুন*</label>
+                                    <label htmlFor="amount_sent" className="block text-sm font-medium text-gray-700">পাঠানো টাকার পরিমাণ উল্লেখ করুন <span className="text-red-500">*</span></label>
                                     <input
                                         type="number"
                                         id="amount_sent"
@@ -194,7 +216,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="transaction_id" className="block text-sm font-medium text-gray-700">রকেটে / নগদ / বিকাশ পাঠানো লেনদেন (Transactions ID) আইডি টি দিন :*</label>
+                                    <label htmlFor="transaction_id" className="block text-sm font-medium text-gray-700">রকেটে / নগদ / বিকাশ  পাঠানো লেনদেন (Transactions ID) আইডি টি দিন <span className="text-red-500">*</span></label>
                                     <input
                                         type="text"
                                         id="transaction_id"
@@ -207,26 +229,28 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="course_interested" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী?*</label>
+                                    <label htmlFor="bach_interested" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী? <span className="text-red-500">*</span></label>
                                     <select
-                                        id="course_interested"
-                                        value={data.course_interested}
-                                        onChange={(e) => setData('course_interested', e.target.value)}
+                                        id="bach_interested"
+                                        value={data.bach_interested}
+                                        onChange={(e) => setData('bach_interested', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
                                         required
                                     >
-                                        <option value="">Select a Course</option>
-                                        {courses.map((course, index) => (
+                                        <option value="">ব্যাচ নির্বাচন করুন</option>
+                                        {bach.map((course, index) => (
                                             <option key={index} value={course}>{course}</option>
                                         ))}
                                     </select>
                                     {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
                                 </div>
 
+
+
                                 <div>
-                                    <label htmlFor="facebook_profile_link" className="block text-sm font-medium text-gray-700">আপনার ফেসবুক প্রোফাইল লিংক দিন (যেমন: www.facebook.com/turningpointjobaid)*</label>
+                                    <label htmlFor="facebook_profile_link" className="block text-sm font-medium text-gray-700">আপনার ফেসবুক প্রোফাইল লিংক দিন (যেমন: www.facebook.com/turningpointjobaid) <span className="text-red-500">*</span></label>
                                     <input
-                                        type="url"
+                                        type="text"
                                         id="facebook_profile_link"
                                         value={data.facebook_profile_link}
                                         onChange={(e) => setData('facebook_profile_link', e.target.value)}
@@ -237,7 +261,7 @@ export default function StudentEdit({ auth, student }) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="representative_name" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে WhatsApp যুক্ত আছেন বা কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন ?*</label>
+                                    <label htmlFor="representative_name" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে  WhatsApp যুক্ত আছেন বা  কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন? <span className="text-red-500">*</span></label>
                                     <select
                                         id="representative_name"
                                         value={data.representative_name}
@@ -253,13 +277,25 @@ export default function StudentEdit({ auth, student }) {
                                     {errors.representative_name && <div className="text-red-500 text-sm mt-1">{errors.representative_name}</div>}
                                 </div>
 
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="agreement"
+                                        className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                                        required
+                                    />
+                                    <label htmlFor="agreement" className="ml-2 block text-sm text-gray-900">
+                                        আপনি এই শর্ত মেনে ভর্তি হয়েছেন যে, কোন অবস্থাতেই ভর্তি বাতিল করা যাবে না এবং টাকা ফেরতযোগ্য নয়,ধন্যবাদ।*
+                                    </label>
+                                </div>
+
                                 <div className="flex items-center justify-end mt-4">
                                     <button
                                         type="submit"
                                         className="inline-flex items-center px-6 py-3 bg-red-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                         disabled={processing}
                                     >
-                                        Update Student
+                                        Register Now
                                     </button>
                                 </div>
                             </form>
