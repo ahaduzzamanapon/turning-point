@@ -124,17 +124,26 @@ const Sidebar = () => {
                                         Students
                                     </Link>
                                 )}
+                                {user.permissions && user.permissions.includes('manage-courses') && (
+                                    <Link
+                                        href={route('admin.courses.index')}
+                                        className={linkStyle('admin.courses.index')}
+                                    >
+                                        Courses
+                                    </Link>
+                                )}
+                                {user.permissions && user.permissions.includes('manage-batches') && (
+                                    <Link
+                                        href={route('admin.batches.index')}
+                                        className={linkStyle('admin.batches.index')}
+                                    >
+                                        Batches
+                                    </Link>
+                                )}
+                               
                             </div>
                         )}
                     </div>
-                )}
-            {user.permissions && user.permissions.includes('courses_view') && (
-                    <Link
-                        href={route('courses.index')}
-                        className={`flex items-center py-2 px-4 rounded-lg transition duration-200 mt-2 ${isActive('courses.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                    >
-                        Courses
-                    </Link>
                 )}</nav>
         </div>
     );

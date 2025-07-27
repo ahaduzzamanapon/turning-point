@@ -1,4 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
+import Swal from 'sweetalert2';
 
 export default function Registration() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -20,11 +21,23 @@ export default function Registration() {
         e.preventDefault();
         post(route('student.register'), {
             onSuccess: () => {
-                alert('Registration successful! Our team will contact you shortly.');
-                window.location = '/';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful!',
+                    text: 'Our team will contact you shortly.',
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then(() => {
+                    window.location = '/';
+                });
             },
             onError: (errors) => {
                 console.error('Registration failed:', errors);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed!',
+                    text: 'Please check the form for errors.',
+                });
             },
         });
     };

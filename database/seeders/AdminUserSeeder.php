@@ -36,6 +36,10 @@ class AdminUserSeeder extends Seeder
             'manage-permissions',
             'manage-settings',
             'manage-students',
+            'manage-batches',
+            'manage-courses',
+            'manage-payment-methods',
+            'manage-representatives',
         ];
 
         foreach ($basePermissions as $permission) {

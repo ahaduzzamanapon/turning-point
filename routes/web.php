@@ -53,6 +53,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('/settings', [App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
 
         Route::resource('/students', App\Http\Controllers\StudentController::class);
+        Route::post('/students/{student}/toggle-active', [App\Http\Controllers\StudentController::class, 'toggleActiveStatus'])->name('students.toggleActiveStatus');
+        Route::post('/students/bulk-update-status', [App\Http\Controllers\StudentController::class, 'bulkUpdateStatus'])->name('students.bulkUpdateStatus');
+        Route::post('/students/{student}/verify-payment', [App\Http\Controllers\StudentController::class, 'verifyPayment'])->name('students.verifyPayment');
+        Route::post('/students/{student}/reject-payment', [App\Http\Controllers\StudentController::class, 'rejectPayment'])->name('students.rejectPayment');
+        Route::patch('/students/{student}/mark-registration-complete', [App\Http\Controllers\StudentController::class, 'markRegistrationComplete'])->name('students.markRegistrationComplete');
+        Route::post('/students/bulk-mark-registration-complete', [App\Http\Controllers\StudentController::class, 'bulkMarkRegistrationComplete'])->name('students.bulkMarkRegistrationComplete');
+        Route::resource('/courses', App\Http\Controllers\CourseController::class);
+        Route::resource('/batches', App\Http\Controllers\BatchController::class);
+
     });
 });
 

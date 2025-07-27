@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->string('student_id')->unique()->nullable();
+            $table->boolean('is_active')->default(true);
             $table->string('candidate_full_name');
             $table->string('mobile_number');
             $table->string('email')->unique();
