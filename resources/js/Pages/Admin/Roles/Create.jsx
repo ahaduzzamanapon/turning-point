@@ -22,7 +22,7 @@ export default function CreateRole({ auth }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-black/30 backdrop-blur-xl shadow-lg rounded-lg border border-white/10 p-6">
                         <div className="p-6 text-gray-900">
                             <h3 className="text-lg font-medium text-gray-900 mb-4">Create New Role</h3>
                             <form onSubmit={handleSubmit}>
