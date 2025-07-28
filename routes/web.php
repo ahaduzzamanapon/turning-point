@@ -79,3 +79,11 @@ Route::get('/registration', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('courses', \App\Http\Controllers\CourseController::class);
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('paymentmethods', \App\Http\Controllers\PaymentMethodController::class);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('representatives', \App\Http\Controllers\RepresentativeController::class);
+});

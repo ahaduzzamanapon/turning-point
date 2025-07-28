@@ -144,6 +144,20 @@ const Sidebar = () => {
                             </div>
                         )}
                     </div>
+                )}{user.permissions && user.permissions.includes('paymentmethods_view') && (
+                    <Link
+                        href={route('paymentmethods.index')}
+                        className={`flex items-center py-2 px-4 rounded-lg transition duration-200 mt-2 ${isActive('paymentmethods.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
+                    >
+                        PaymentMethods
+                    </Link>
+                )}{user.permissions && user.permissions.includes('representatives_view') && (
+                    <Link
+                        href={route('representatives.index')}
+                        className={`flex items-center py-2 px-4 rounded-lg transition duration-200 mt-2 ${isActive('representatives.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
+                    >
+                        Representatives
+                    </Link>
                 )}</nav>
         </div>
     );
