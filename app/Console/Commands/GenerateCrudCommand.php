@@ -91,7 +91,7 @@ class GenerateCrudCommand extends Command
 
     protected function addLinkToSidebar(string $modelName)
     {
-        $sidebarPath = resource_path('js/layouts/AuthenticatedLayout.jsx');
+        $sidebarPath = resource_path('js/Components/Sidebar.jsx');
         $sidebarContent = File::get($sidebarPath);
 
         $modelNamePlural = Str::plural($modelName); // e.g., 'Products'

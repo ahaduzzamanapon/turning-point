@@ -16,15 +16,15 @@ export default function CreateRole({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Create Role</h2>}
+            header={<h2 className="font-semibold text-xl text-white leading-tight">Create Role</h2>}
         >
             <Head title="Create Role" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-black/30 backdrop-blur-xl shadow-lg rounded-lg border border-white/10 p-6">
-                        <div className="p-6 text-gray-900">
-                            <h3 className="text-lg font-medium text-gray-900 mb-4">Create New Role</h3>
+                        <div className="p-6 text-white">
+                            <h3 className="text-lg font-medium text-white mb-4">Create New Role</h3>
                             <form onSubmit={handleSubmit}>
                                 <RoleForm data={data} setData={setData} errors={errors} />
                                 <div className="mt-4">

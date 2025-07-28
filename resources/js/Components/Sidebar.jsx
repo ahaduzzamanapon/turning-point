@@ -80,7 +80,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         aria-hidden="true"
                         onClick={() => setSidebarOpen(false)} // Close on backdrop click
                     ></div>
-                    <div className="relative flex-1 flex flex-col max-w-xs w-full bg-black/50 backdrop-blur-xl border-r border-white/10 pt-5 pb-4 shadow-xl">
+                    <div className="relative flex-1 flex flex-col max-w-xs w-full  backdrop-blur-xl border-r border-white/10 pt-5 pb-4 shadow-xl">
                         <div className="absolute top-0 right-0 -mr-12 pt-2">
                             <button
                                 type="button"
@@ -172,7 +172,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
             {/* Static sidebar for desktop */}
             <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-                <div className="flex flex-col flex-grow bg-black/50 backdrop-blur-xl border-r border-white/10 pt-5 overflow-y-auto shadow-lg">
+                <div className="flex flex-col flex-grow  backdrop-blur-xl border-r border-white/10 pt-5 overflow-y-auto shadow-lg">
                     <div className="flex items-center flex-shrink-0 px-4">
                         <Link href="/" className="flex items-center space-x-3">
                             <img className="h-10 w-auto" src="/images/logo.png" alt="Logo" />

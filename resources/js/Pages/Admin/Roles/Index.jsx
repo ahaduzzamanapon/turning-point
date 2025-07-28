@@ -55,16 +55,16 @@ export default function RoleManagement({ auth, roles, permissions }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Role Management</h2>}
+            header={<h2 className="font-semibold text-xl text-white leading-tight">Role Management</h2>}
         >
             <Head title="Role Management" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-black/30 backdrop-blur-xl shadow-lg rounded-lg border border-white/10 p-6">
-                        <div className="p-6 text-gray-900">
+                        <div className="p-6 text-white">
                             <div className="flex justify-between items-center mb-4">
-                                <h3 className="text-lg font-medium text-gray-900">Roles</h3>
+                                <h3 className="text-lg font-medium text-white">Roles</h3>
                                 <Link href={route('admin.roles.create')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Add Role
                                 </Link>
@@ -88,7 +88,7 @@ export default function RoleManagement({ auth, roles, permissions }) {
                                                         onChange={() => handlePermissionChange(role.id, permission.id)}
                                                         className="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                                                     />
-                                                    <span className="text-sm text-gray-700">{permission.name}</span>
+                                                    <span className="text-sm text-white">{permission.name}</span>
                                                 </label>
                                             ))}
                                         </div>

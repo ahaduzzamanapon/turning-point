@@ -13,10 +13,10 @@ export default function AuthenticatedLayout({ header, children }) {
 
             <div className="md:pl-64 flex flex-col flex-1">
                 {/* Mobile sidebar toggle */}
-                <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-black/50 backdrop-blur-md border-b border-white/10">
+                <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3  backdrop-blur-md border-b border-white/10">
                     <button
                         type="button"
-                        className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-maroon"
+                        className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-maroon"
                         onClick={() => setSidebarOpen(true)}
                     >
                         <span className="sr-only">Open sidebar</span>
@@ -26,7 +26,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                 <main className="flex-1 p-4 md:p-8">
                     {header && (
-                        <header className="bg-black/50 dark:bg-black/50 backdrop-blur-xl shadow-lg rounded-xl mb-8 border border-white/10"> {/* Transparent header */}
+                        <header className=" dark: backdrop-blur-xl shadow-lg rounded-xl mb-8 border border-white/10"> {/* Transparent header */}
                             <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 text-white"> {/* Text color for header */}
                                 {header}
                             </div>

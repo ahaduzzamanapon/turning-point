@@ -58,7 +58,7 @@ export default function Login({ status, canResetPassword }) {
 
                         <form onSubmit={submit} className="space-y-6">
                             <div>
-                                <InputLabel htmlFor="email" value="Email" className="text-gray-700 dark:text-gray-300 !font-semibold" />
+                                <InputLabel htmlFor="email" value="Email" className="text-white dark:text-gray-300 !font-semibold" />
                                 <TextInput
                                     id="email"
                                     type="email"
@@ -73,7 +73,7 @@ export default function Login({ status, canResetPassword }) {
                             </div>
 
                             <div>
-                                <InputLabel htmlFor="password" value="Password" className="text-gray-700 dark:text-gray-300 !font-semibold" />
+                                <InputLabel htmlFor="password" value="Password" className="text-white dark:text-gray-300 !font-semibold" />
                                 <TextInput
                                     id="password"
                                     type="password"

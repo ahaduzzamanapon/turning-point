@@ -17,7 +17,7 @@ export default function Edit({ model }) {
         <>
           <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Edit Representative</h2>}
+            header={<h2 className="font-semibold text-xl text-white leading-tight">Edit Representative</h2>}
         >
             <h1 className="text-2xl font-bold">Edit Representative</h1>
             <hr className="my-4" />

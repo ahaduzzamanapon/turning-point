@@ -132,14 +132,14 @@ export default function StudentIndex({ auth, students, courses, batches, payment
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Students</h2>}
+            header={<h2 className="font-semibold text-xl text-white leading-tight">Students</h2>}
         >
             <Head title="Students" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-black/30 backdrop-blur-xl shadow-lg rounded-lg border border-white/10 p-6">
-                        <div className="p-6 text-gray-900">
+                        <div className="p-6 text-white">
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-2xl font-bold text-red-700">All Students</h3>
                                 <div className="flex space-x-2">
@@ -167,13 +167,13 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                 </div>
                             </div>
 
-                            <div className="mb-4 flex flex-wrap gap-4">
+                            <div className="mb-4 flex gap-4">
                                 <input
                                     type="text"
                                     placeholder="Search students..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                    className="mt-1 block rounded-md border-gray-300 bg-black/30 backdrop-blur-xl border border-white/10 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-[20%]"
                                 />
                                 <select
                                     value={selectedCourse}
@@ -181,7 +181,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                         setSelectedCourse(e.target.value);
                                         setSelectedBatch(''); // Reset batch when course changes
                                     }}
-                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                    className="mt-1 block rounded-md border-gray-300 bg-black/30 backdrop-blur-xl border border-white/10 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-[20%]"
                                 >
                                     <option value="">All Courses</option>
                                     {courses.map(course => (
@@ -192,7 +192,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                 <select
                                     value={selectedPaymentMethod}
                                     onChange={(e) => setSelectedPaymentMethod(e.target.value)}
-                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                    className="mt-1 block rounded-md border-gray-300 bg-black/30 backdrop-blur-xl border border-white/10 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-[20%]"
                                 >
                                     <option value="">All Payment Methods</option>
                                     {paymentMethods.map(method => (
@@ -202,7 +202,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                 <select
                                     value={selectedRepresentative}
                                     onChange={(e) => setSelectedRepresentative(e.target.value)}
-                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                    className="mt-1 block rounded-md border-gray-300 bg-black/30 backdrop-blur-xl border border-white/10 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-[20%]"
                                 >
                                     <option value="">All Representatives</option>
                                     {representatives.map(rep => (
@@ -213,9 +213,9 @@ export default function StudentIndex({ auth, students, courses, batches, payment
 
                             <div className="overflow-x-auto">
                                 <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
+                                    <thead className="text-white bg-black/10 backdrop-blur-xl border-b-4 border-[#8b2022]">
                                         <tr>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                                 <input
                                                     type="checkbox"
                                                     onChange={handleSelectAll}
@@ -223,22 +223,22 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                                     className="rounded border-gray-300 text-red-600 shadow-sm focus:ring-red-500"
                                                 />
                                             </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">batch</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Status</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registration Status</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Mobile</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Course</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">batch</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Payment Status</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Registration Status</th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
+                                    <tbody className="text-white bg-black/10 backdrop-blur-xl border-b-1 border-[#8b2022]">
                                         {filteredStudents.length > 0 ? (
                                             filteredStudents.map((student) => (
                                                 <tr key={student.id}>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                                                         <input
                                                             type="checkbox"
                                                             checked={selectedStudents.includes(student.id)}
@@ -246,12 +246,12 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                                             className="rounded border-gray-300 text-red-600 shadow-sm focus:ring-red-500"
                                                         />
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{student.candidate_full_name}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.mobile_number}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.course.name}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.batch.name}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{student.candidate_full_name}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{student.email}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{student.mobile_number}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{student.course.name}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{student.batch.name}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                         {student.is_active ? (
                                                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                                 Active
@@ -262,7 +262,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                                             </span>
                                                         )}
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                                                             student.payment_status === 'verified' ? 'bg-green-100 text-green-800' :
                                                             student.payment_status === 'rejected' ? 'bg-red-100 text-red-800' :
@@ -271,7 +271,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                                             {student.payment_status}
                                                         </span>
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                                                             student.registration_status === 'completed' ? 'bg-green-100 text-green-800' :
                                                             'bg-gray-100 text-gray-800'
@@ -321,7 +321,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="10" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No students found.</td>
+                                                <td colSpan="10" className="px-6 py-4 whitespace-nowrap text-sm text-white text-center">No students found.</td>
                                             </tr>
                                         )}
                                     </tbody>
