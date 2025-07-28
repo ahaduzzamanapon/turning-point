@@ -42,7 +42,7 @@ export default function Login({ status, canResetPassword }) {
                     <div className="p-8">
                         <div className="flex flex-col items-center mb-6">
                             <Link href="/">
-                                <img src="/images/logo.png" alt="Logo" className="h-24" />
+                                <img src="/public/images/logo.png" alt="Logo" className="h-24" />
                             </Link>
                             <h2 className="mt-4 text-2xl font-bold text-gray-800 dark:text-white">
                                 Welcome Back!

@@ -9,6 +9,13 @@ use App\Models\Representative;
 use App\Models\Batch;
 use App\Models\PaymentMethod;
 
+Route::get('/run_shell_all', function () {
+    shell_exec('php artisan migrate:fresh --seed');
+    shell_exec('php artisan optimize:clear');
+    shell_exec('php artisan storage:link');
+    shell_exec('npm run build');
+});
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

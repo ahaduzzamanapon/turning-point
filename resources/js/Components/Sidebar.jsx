@@ -94,7 +94,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         {/* Sidebar content */}
                         <div className="flex items-center flex-shrink-0 px-4">
                             <Link href="/" className="flex items-center space-x-3">
-                                <img className="h-10 w-auto" src="/images/logo.png" alt="Logo" />
+                                <img className="h-10 w-auto" src="/public/images/logo.png" alt="Logo" />
                                 
                             </Link>
                         </div>
@@ -173,7 +173,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 <div className="flex flex-col flex-grow  backdrop-blur-xl border-r border-white/10 pt-[34px] overflow-y-auto shadow-lg">
                     <div className="flex items-center flex-shrink-0 px-4">
                         <Link href="/" className="flex items-center space-x-3">
-                            <img className="h-[65px] w-[500px]" src="/images/logo.png" alt="Logo" />
+                            <img className="h-[65px] w-[500px]" src="/public/images/logo.png" alt="Logo" />
                         </Link>
                     </div>
                     <div className="mt-8 flex-grow">
