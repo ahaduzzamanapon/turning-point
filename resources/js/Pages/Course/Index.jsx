@@ -13,7 +13,7 @@ export default function CourseIndex({ auth, data }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Courses</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Courses</h2>}
         >
             <Head title="Courses" />
 

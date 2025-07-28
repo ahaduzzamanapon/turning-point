@@ -132,7 +132,7 @@ export default function StudentIndex({ auth, students, courses, batches, payment
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Students</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Students</h2>}
         >
             <Head title="Students" />
 

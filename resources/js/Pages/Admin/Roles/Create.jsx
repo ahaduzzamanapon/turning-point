@@ -16,7 +16,7 @@ export default function CreateRole({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Role</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Create Role</h2>}
         >
             <Head title="Create Role" />
 

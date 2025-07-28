@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 body {
-    background-color: #111827; /* A dark gray-blue as base */
-    background-image:
-        radial-gradient(at 47% 33%, hsl(180.00, 0%, 100%) 0, transparent 59%),
-        radial-gradient(at 82% 65%, hsl(240.00, 3%, 13%) 0, transparent 55%);
+    background-color: #111827;
+    background-image: radial-gradient(at 47% 33%, hsl(357deg 72.75% 20.15%) 0, transparent 59%), radial-gradient(at 82% 65%, hsl(240.00, 3%, 13%) 0, transparent 55%);
 }

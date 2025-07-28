@@ -6,7 +6,7 @@ export default function PermissionManagement({ auth, permissions }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Permission Management</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Permission Management</h2>}
         >
             <Head title="Permission Management" />
 

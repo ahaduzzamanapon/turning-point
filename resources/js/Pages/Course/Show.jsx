@@ -5,7 +5,7 @@ export default function CourseShow({ auth, course }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Course Details</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Course Details</h2>}
         >
             <Head title="Course Details" />
 

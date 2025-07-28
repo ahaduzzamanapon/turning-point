@@ -18,7 +18,7 @@ export default function Create() {
         <>
           <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit PaymentMethod</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Edit PaymentMethod</h2>}
         >
             <h1 className="text-2xl font-bold">Create PaymentMethod</h1>
             <hr className="my-4" />

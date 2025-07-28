@@ -18,7 +18,7 @@ export default function BatchCreate({ auth, courses }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Batch</h2>}
+            header={<h2 className="font-semibold text-xl text-light-800 leading-tight">Create Batch</h2>}
         >
             <Head title="Create Batch" />
 
