@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Course;
+use App\Models\Representative;
+use App\Models\Batch;
+use App\Models\PaymentMethod;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -24,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/crud-builder', [App\Http\Controllers\CrudBuilderController::class, 'index'])->name('crud.builder');
     Route::post('/crud-builder', [App\Http\Controllers\CrudBuilderController::class, 'generate'])->name('crud.generate');
 
@@ -65,7 +69,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::post('/register-student', [App\Http\Controllers\StudentController::class, 'store'])->name('student.register');
 
@@ -74,10 +78,39 @@ Route::get('/registration', function () {
 })->name('registration');
 
 
+ Route::prefix('api')->group(function () {
+        
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+    
+        Route::get('/courses', function () {
+            return Course::all();
+        });
+    
+        Route::get('/representatives', function () {
+            return Representative::all();
+        });
+    
+        Route::get('/batches', function () {
+            return [];
+        });
+    
+        Route::get('/payment-methods', function () {
+            return PaymentMethod::all();
+        });
+        Route::get('/courses/{course}/batches', function (App\Models\Course $course) {
+           
+            return $course->batches;
+        });
+    });
+
 
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('courses', \App\Http\Controllers\CourseController::class);
+
+   
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -26,14 +26,14 @@ class StudentRequest extends FormRequest
             'mobile_number' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:students,email,' . ($this->student->id ?? ''),
             'full_address' => 'required|string',
-            'payment_method' => 'required|string|max:255',
+            'course_interested_id' => 'required|integer|exists:courses,id',
+            'bach_interested_id' => 'required|integer|exists:batches,id',
+            'payment_method_id' => 'required|integer|exists:payment_methods,id',
             'sender_mobile_number' => 'required|string|max:20',
             'amount_sent' => 'required|numeric',
             'transaction_id' => 'required|string|max:255',
-            'course_interested' => 'required|string|max:255',
-            'bach_interested' => 'required|string|max:255',
             'facebook_profile_link' => 'nullable|string|max:255',
-            'representative_name' => 'required|string|max:255',
+            'representative_id' => 'required|integer|exists:representatives,id',
         ];
     }
 }

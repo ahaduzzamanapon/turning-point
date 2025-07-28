@@ -21,9 +21,9 @@ class BatchSeeder extends Seeder
             ['name' => 'O.G  Crash Course', 'course_name' => 'O.G Crash Course', 'start_time' => '18:00:00', 'end_time' => '20:00:00', 'status' => 'active'],
         ];
 
-        foreach ($batchesData as $batchData) {
-            $course = Course::where('name', $batchData['course_name'])->first();
-            if ($course) {
+        $courses = Course::all();
+        foreach ($courses as $course) {
+            foreach ($batchesData as $batchData) {
                 Batch::create([
                     'course_id' => $course->id,
                     'name' => $batchData['name'],
@@ -32,6 +32,7 @@ class BatchSeeder extends Seeder
                     'status' => $batchData['status'],
                 ]);
             }
+            
         }
     }
 }

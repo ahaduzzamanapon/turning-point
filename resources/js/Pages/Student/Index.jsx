@@ -17,15 +17,14 @@ export default function StudentIndex({ auth, students }) {
 
     const handlePaymentVerification = (isVerified) => {
         if (currentStudentPayment) {
-            console.log('Attempting to verify payment for student:', currentStudentPayment.id);
-            console.log('is_verified status:', isVerified);
             post(route('admin.students.verifyPayment', currentStudentPayment.id), {
                 is_verified: isVerified,
             }, {
+                preserveScroll: true,
                 onSuccess: () => {
-                    console.log('Payment verification successful!');
                     setShowPaymentModal(false);
                     setCurrentStudentPayment(null);
+                    console.log('Payment verification successful!');
                 },
                 onError: (errors) => {
                     console.error('Payment verification failed:', errors);
@@ -65,7 +64,7 @@ export default function StudentIndex({ auth, students }) {
             alert('Please select at least one student.');
             return;
         }
-        console.log('Sending bulkUpdateStatus as POST request.');
+      
         if (confirm(`Are you sure you want to ${status ? 'activate' : 'deactivate'} selected students?`)) {
             post(route('admin.students.bulkUpdateStatus'), {
                 ids: selectedStudents,
@@ -95,9 +94,6 @@ export default function StudentIndex({ auth, students }) {
             return;
         }
         const routeUrl = route('admin.students.bulkMarkRegistrationComplete');
-        console.log('Attempting to bulk mark registration complete. URL:', routeUrl);
-        console.log('Sending data:', { ids: selectedStudents });
-        console.log('Sending bulkMarkRegistrationComplete as POST request.');
         if (confirm("Are you sure you want to mark selected student's registration as complete?")) {
             post(routeUrl, {
                 ids: selectedStudents,
@@ -205,8 +201,8 @@ export default function StudentIndex({ auth, students }) {
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{student.candidate_full_name}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.mobile_number}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.course_interested}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.bach_interested}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.course.name}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.batch.name}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                         {student.is_active ? (
                                                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -296,12 +292,13 @@ export default function StudentIndex({ auth, students }) {
                             <p><strong>Candidate Name:</strong> {currentStudentPayment.candidate_full_name}</p>
                             <p><strong>Mobile Number:</strong> {currentStudentPayment.mobile_number}</p>
                             <p><strong>Email:</strong> {currentStudentPayment.email}</p>
-                            <p><strong>Payment Method:</strong> {currentStudentPayment.payment_method}</p>
+                            <p><strong>Payment Method:</strong> {currentStudentPayment.payment_method.name}</p>
                             <p><strong>Sender Mobile Number:</strong> {currentStudentPayment.sender_mobile_number}</p>
                             <p><strong>Amount Sent:</strong> {currentStudentPayment.amount_sent}</p>
                             <p><strong>Transaction ID:</strong> {currentStudentPayment.transaction_id}</p>
-                            <p><strong>Course Interested:</strong> {currentStudentPayment.course_interested}</p>
-                            <p><strong>Batch Interested:</strong> {currentStudentPayment.bach_interested}</p>
+                            <p><strong>Course Interested:</strong> {currentStudentPayment.course.name}</p>
+                            <p><strong>Batch Interested:</strong> {currentStudentPayment.batch.name}</p>
+                            <p><strong>Representative:</strong> {currentStudentPayment.representative.name}</p>
                         </div>
                     )}
                     <div className="mt-6 flex justify-end space-x-3">

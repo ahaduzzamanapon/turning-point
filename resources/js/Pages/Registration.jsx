@@ -5,17 +5,17 @@ import { useEffect, useState } from 'react';
 export default function Registration() {
     const { data, setData, post, processing, errors, reset } = useForm({
         candidate_full_name: '',
-        bach_interested: '',
+        bach_interested_id: '',
         mobile_number: '',
         email: '',
         full_address: '',
-        payment_method: '',
+        payment_method_id: '',
         sender_mobile_number: '',
         amount_sent: '',
         transaction_id: '',
-        course_interested: '',
+        course_interested_id: '',
         facebook_profile_link: '',
-        representative_name: '',
+        representative_id: '',
     });
 
     const [courses, setCourses] = useState([]);
@@ -81,20 +81,31 @@ export default function Registration() {
                     <form onSubmit={handleSubmit} className="space-y-6">
 
                         <div>
-                            <label htmlFor="course_interested" className="block text-sm font-medium text-gray-700">Choose Your Course <span className="text-red-500">*</span></label>
+                            <label htmlFor="course_interested_id" className="block text-sm font-medium text-gray-700">Choose Your Course <span className="text-red-500">*</span></label>
                             <select
-                                id="course_interested"
-                                value={data.course_interested}
-                                onChange={(e) => setData('course_interested', e.target.value)}
+                                id="course_interested_id"
+                                value={data.course_interested_id}
+                                onChange={(e) => {
+                                    const courseId = e.target.value;
+                                    setData('course_interested_id', courseId);
+                                    setData('bach_interested_id', ''); // Reset batch when course changes
+                                    if (courseId) {
+                                        fetch(`/api/courses/${courseId}/batches`)
+                                            .then(response => response.json())
+                                            .then(data => setBatches(data));
+                                    } else {
+                                        setBatches([]);
+                                    }
+                                }}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
                                 required
                             >
                                 <option value="">Choose Your Course</option>
                                 {courses.map((course) => (
-                                    <option key={course.id} value={course.name}>{course.name}</option>
+                                    <option key={course.id} value={course.id}>{course.name}</option>
                                 ))}
                             </select>
-                            {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
+                            {errors.course_interested_id && <div className="text-red-500 text-sm mt-1">{errors.course_interested_id}</div>}
                         </div>
 
                         <div>
@@ -158,8 +169,8 @@ export default function Registration() {
                                             type="radio"
                                             id={method.name}
                                             name="payment_method"
-                                            value={`${method.name} : ${method.number}`}
-                                            onChange={(e) => setData('payment_method', e.target.value)}
+                                            value={method.id}
+                                            onChange={(e) => setData('payment_method_id', e.target.value)}
                                             className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
                                             required
                                         />
@@ -167,7 +178,7 @@ export default function Registration() {
                                     </div>
                                 ))}
                             </div>
-                            {errors.payment_method && <div className="text-red-500 text-sm mt-1">{errors.payment_method}</div>}
+                            {errors.payment_method_id && <div className="text-red-500 text-sm mt-1">{errors.payment_method_id}</div>}
                         </div>
 
                         <div>
@@ -210,20 +221,20 @@ export default function Registration() {
                         </div>
 
                          <div>
-                            <label htmlFor="bach_interested" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী? <span className="text-red-500">*</span></label>
+                            <label htmlFor="bach_interested_id" className="block text-sm font-medium text-gray-700">যে ব্যাচে ভর্তি হতে আগ্রহী? <span className="text-red-500">*</span></label>
                             <select
-                                id="bach_interested"
-                                value={data.bach_interested}
-                                onChange={(e) => setData('bach_interested', e.target.value)}
+                                id="bach_interested_id"
+                                value={data.bach_interested_id}
+                                onChange={(e) => setData('bach_interested_id', e.target.value)}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
                                 required
                             >
                                 <option value="">ব্যাচ নির্বাচন করুন</option>
                                 {batches.map((batch) => (
-                                    <option key={batch.id} value={batch.name}>{batch.name}</option>
+                                    <option key={batch.id} value={batch.id}>{batch.name}</option>
                                 ))}
                             </select>
-                            {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
+                            {errors.bach_interested_id && <div className="text-red-500 text-sm mt-1">{errors.bach_interested_id}</div>}
                         </div>
 
                         
@@ -242,20 +253,20 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="representative_name" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে  WhatsApp যুক্ত আছেন বা  কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন? <span className="text-red-500">*</span></label>
+                            <label htmlFor="representative_id" className="block text-sm font-medium text-gray-700">আপনি আমাদের যে প্রতিনিধির সাথে  WhatsApp যুক্ত আছেন বা  কথা বলে এডমিশন নিয়েছেন তার নাম নির্বাচন করুন? <span className="text-red-500">*</span></label>
                             <select
-                                id="representative_name"
-                                value={data.representative_name}
-                                onChange={(e) => setData('representative_name', e.target.value)}
+                                id="representative_id"
+                                value={data.representative_id}
+                                onChange={(e) => setData('representative_id', e.target.value)}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 p-2"
                                 required
                             >
                                 <option value="">Select a Representative</option>
                                 {representatives.map((rep) => (
-                                    <option key={rep.id} value={`${rep.name} - ${rep.number}`}>{rep.name} - {rep.number}</option>
+                                    <option key={rep.id} value={rep.id}>{rep.name} - {rep.number}</option>
                                 ))}
                             </select>
-                            {errors.representative_name && <div className="text-red-500 text-sm mt-1">{errors.representative_name}</div>}
+                            {errors.representative_id && <div className="text-red-500 text-sm mt-1">{errors.representative_id}</div>}
                         </div>
 
                         <div className="flex items-center">

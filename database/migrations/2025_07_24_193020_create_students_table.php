@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('mobile_number');
             $table->string('email')->unique();
             $table->text('full_address');
-            $table->string('payment_method');
+            $table->string('payment_method_id');
             $table->string('sender_mobile_number');
             $table->decimal('amount_sent', 10, 2);
             $table->string('transaction_id');
-            $table->string('course_interested');
-            $table->string('bach_interested');
+            $table->string('course_interested_id');
+            $table->string('bach_interested_id');
             $table->string('facebook_profile_link')->nullable();
-            $table->string('representative_name');
+            $table->string('representative_id');
             $table->timestamps();
         });
     }

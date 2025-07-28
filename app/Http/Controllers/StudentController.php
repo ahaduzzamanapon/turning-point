@@ -12,7 +12,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::all();
+        $students = Student::with(['course', 'batch', 'paymentMethod', 'representative'])->get();
         return Inertia::render('Student/Index', [
             'students' => $students,
         ]);
@@ -89,10 +89,11 @@ class StudentController extends Controller
     public function verifyPayment($studentId)
     {
         
+        //dd($studentId);
         $student = Student::findOrFail($studentId);
         $student->payment_status = 'verified';
         $student->save();
-        return redirect()->route('admin.students.index')->with('success', 'Payment status updated successfully!');
+        return response()->json(['message' => 'Payment verified successfully!']);
     }
 
     public function rejectPayment($studentId)

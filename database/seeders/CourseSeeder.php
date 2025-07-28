@@ -25,7 +25,7 @@ class CourseSeeder extends Seeder
         ];
 
         foreach ($courses as $courseData) {
-            Course::create($courseData);
+            $course = Course::create($courseData);
         }
     }
 }
