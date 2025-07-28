@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Student; // Added for dynamic data
+use App\Models\Course; // Added for dynamic data
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
@@ -16,6 +18,31 @@ class AdminController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Index');
+    }
+
+    // New method to fetch dashboard data
+    public function dashboardData()
+    {
+        // Fetch dynamic data
+        $totalStudents = Student::count();
+        $totalCourses = Course::count();
+        // For demonstration, using dummy data for revenue and new registrations
+        // In a real application, you would fetch this from your database
+        $monthlyRevenue = 25000; // Example
+        $newRegistrations = 150; // Example
+
+        // Data for charts (example - you'd fetch this dynamically)
+        $salesData = [65, 59, 80, 81, 56, 55, 40]; // Monthly sales
+        $enrollmentData = [300, 250, 180, 220]; // Course enrollments
+
+        return Inertia::render('Dashboard', [
+            'totalStudents' => $totalStudents,
+            'totalCourses' => $totalCourses,
+            'monthlyRevenue' => $monthlyRevenue,
+            'newRegistrations' => $newRegistrations,
+            'salesData' => $salesData,
+            'enrollmentData' => $enrollmentData,
+        ]);
     }
 
     public function users()
