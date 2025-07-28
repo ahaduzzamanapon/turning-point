@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/students/bulk-update-status', [App\Http\Controllers\StudentController::class, 'bulkUpdateStatus'])->name('students.bulkUpdateStatus');
         Route::post('/students/{student}/verify-payment', [App\Http\Controllers\StudentController::class, 'verifyPayment'])->name('students.verifyPayment');
         Route::post('/students/{student}/reject-payment', [App\Http\Controllers\StudentController::class, 'rejectPayment'])->name('students.rejectPayment');
-        Route::patch('/students/{student}/mark-registration-complete', [App\Http\Controllers\StudentController::class, 'markRegistrationComplete'])->name('students.markRegistrationComplete');
+        Route::post('/students/{student}/mark-registration-complete', [App\Http\Controllers\StudentController::class, 'markRegistrationComplete'])->name('students.markRegistrationComplete');
         Route::post('/students/bulk-mark-registration-complete', [App\Http\Controllers\StudentController::class, 'bulkMarkRegistrationComplete'])->name('students.bulkMarkRegistrationComplete');
         Route::resource('/courses', App\Http\Controllers\CourseController::class);
         Route::resource('/batches', App\Http\Controllers\BatchController::class);

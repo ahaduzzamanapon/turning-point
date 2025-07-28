@@ -15,6 +15,10 @@ class StudentController extends Controller
         $students = Student::with(['course', 'batch', 'paymentMethod', 'representative'])->get();
         return Inertia::render('Student/Index', [
             'students' => $students,
+            'courses' => \App\Models\Course::all(),
+            'batches' => \App\Models\Batch::all(),
+            'paymentMethods' => \App\Models\PaymentMethod::all(),
+            'representatives' => \App\Models\Representative::all(),
         ]);
     }
 
@@ -93,7 +97,7 @@ class StudentController extends Controller
         $student = Student::findOrFail($studentId);
         $student->payment_status = 'verified';
         $student->save();
-        return response()->json(['message' => 'Payment verified successfully!']);
+        return redirect()->route('admin.students.index')->with('success', 'Payment verified successfully!');
     }
 
     public function rejectPayment($studentId)

@@ -3,12 +3,18 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import Modal from '@/Components/Modal'; // Assuming you have a Modal component
 
-export default function StudentIndex({ auth, students }) {
+export default function StudentIndex({ auth, students, courses, batches, paymentMethods, representatives }) {
     const { delete: destroy, patch, post } = useForm();
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [selectedBatch, setSelectedBatch] = useState('');
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+    const [selectedRepresentative, setSelectedRepresentative] = useState('');
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [currentStudentPayment, setCurrentStudentPayment] = useState(null);
     const [selectedStudents, setSelectedStudents] = useState([]);
+
+    
 
     const openPaymentModal = (student) => {
         setCurrentStudentPayment(student);
@@ -30,6 +36,7 @@ export default function StudentIndex({ auth, students }) {
                     console.error('Payment verification failed:', errors);
                 },
             });
+            window.location.reload();
         }
     };
 
@@ -109,11 +116,18 @@ export default function StudentIndex({ auth, students }) {
         }
     };
 
-    const filteredStudents = students.filter(student =>
-        student.candidate_full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.mobile_number.includes(searchTerm)
-    );
+    const filteredStudents = students.filter(student => {
+        const matchesSearchTerm = student.candidate_full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                  student.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                  student.mobile_number.includes(searchTerm);
+
+        const matchesCourse = selectedCourse === '' || student.course.id === parseInt(selectedCourse);
+        const matchesBatch = selectedBatch === '' || student.batch.id === parseInt(selectedBatch);
+        const matchesPaymentMethod = selectedPaymentMethod === '' || student.payment_method.id === parseInt(selectedPaymentMethod);
+        const matchesRepresentative = selectedRepresentative === '' || student.representative.id === parseInt(selectedRepresentative);
+
+        return matchesSearchTerm && matchesCourse && matchesBatch && matchesPaymentMethod && matchesRepresentative;
+    });
 
     return (
         <AuthenticatedLayout
@@ -153,14 +167,48 @@ export default function StudentIndex({ auth, students }) {
                                 </div>
                             </div>
 
-                            <div className="mb-4">
+                            <div className="mb-4 flex flex-wrap gap-4">
                                 <input
                                     type="text"
                                     placeholder="Search students..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
                                 />
+                                <select
+                                    value={selectedCourse}
+                                    onChange={(e) => {
+                                        setSelectedCourse(e.target.value);
+                                        setSelectedBatch(''); // Reset batch when course changes
+                                    }}
+                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                >
+                                    <option value="">All Courses</option>
+                                    {courses.map(course => (
+                                        <option key={course.id} value={course.id}>{course.name}</option>
+                                    ))}
+                                </select>
+                                
+                                <select
+                                    value={selectedPaymentMethod}
+                                    onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                >
+                                    <option value="">All Payment Methods</option>
+                                    {paymentMethods.map(method => (
+                                        <option key={method.id} value={method.id}>{method.name}</option>
+                                    ))}
+                                </select>
+                                <select
+                                    value={selectedRepresentative}
+                                    onChange={(e) => setSelectedRepresentative(e.target.value)}
+                                    className="w-full md:w-1/2 lg:w-1/4 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50"
+                                >
+                                    <option value="">All Representatives</option>
+                                    {representatives.map(rep => (
+                                        <option key={rep.id} value={rep.id}>{rep.name}</option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="overflow-x-auto">
