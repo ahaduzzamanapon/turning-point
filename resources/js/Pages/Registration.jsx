@@ -1,5 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
 
 export default function Registration() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,6 +17,29 @@ export default function Registration() {
         facebook_profile_link: '',
         representative_name: '',
     });
+
+    const [courses, setCourses] = useState([]);
+    const [representatives, setRepresentatives] = useState([]);
+    const [batches, setBatches] = useState([]);
+    const [paymentMethods, setPaymentMethods] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/courses')
+            .then(response => response.json())
+            .then(data => setCourses(data));
+
+        fetch('/api/representatives')
+            .then(response => response.json())
+            .then(data => setRepresentatives(data));
+
+        fetch('/api/batches')
+            .then(response => response.json())
+            .then(data => setBatches(data));
+
+        fetch('/api/payment-methods')
+            .then(response => response.json())
+            .then(data => setPaymentMethods(data));
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,38 +66,6 @@ export default function Registration() {
         });
     };
 
-    const courses = [
-        "Ad + Govt. Bank + Private Bank Regular Batch (Pri.+Written)",
-        "Premium Written Batch (Only Bank Job )",
-        "IT Special Batch (Only Bank Job)",
-        "Basic Course (Math +English)",
-        "O.G Crash Course",
-        "২৪ তম ব্যাচ (রাত ৮ টায়) রেগুলার (প্রিলি. + রিটেন)(Upcoming New Batch)",
-        "IT Special Batch-01(Only Bank Job)",
-        "Basic Course (Math +English)-01",
-        "O.G Crash Course"
-    ];
-
-    const representatives = [
-        "Sanjana -01896224207",
-        "Zannat - 01896224202",
-        "Liza -01896224206",
-        "Nasrin -01896224208",
-        "Tanusree -01896400336",
-        "Antora - 01896400333",
-        "Tania - 01896224205",
-        "Bappi Das Sir - 01896224210",
-        "Tarek Sir - 01896224200",
-        "Mamun Sir- 01896224211",
-        "other - other"
-    ];
-    const bach = [
-        "২৪ তম ব্যাচ (রাত ৮ টায়) রেগুলার (প্রিলি. + রিটেন)(Upcoming New Batch)",
-        "IT Special Batch-01(Only Bank Job)",
-        "Basic Course (Math +English)-01",
-        "O.G  Crash Course",
-    ];
-
     return (
         <>
             <Head title="Registration Form - Turning Point Job Aid" />
@@ -98,8 +90,8 @@ export default function Registration() {
                                 required
                             >
                                 <option value="">Choose Your Course</option>
-                                {courses.map((course, index) => (
-                                    <option key={index} value={course}>{course}</option>
+                                {courses.map((course) => (
+                                    <option key={course.id} value={course.name}>{course.name}</option>
                                 ))}
                             </select>
                             {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
@@ -160,51 +152,20 @@ export default function Registration() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Your payment methods <span className="text-red-500">*</span></label>
                             <div className="mt-1 space-y-2">
-                                <div className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        id="bkash"
-                                        name="payment_method"
-                                        value="Bkash (Merchant) (Payment) : 01896 22 42 00"
-                                        onChange={(e) => setData('payment_method', e.target.value)}
-                                        className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
-                                        required
-                                    />
-                                    <label htmlFor="bkash" className="ml-3 block text-sm font-medium text-gray-700">Bkash (Merchant) (Payment) : 01896 22 42 00</label>
-                                </div>
-                                <div className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        id="nagad"
-                                        name="payment_method"
-                                        value="Nagad (Merchant) (Payment) : 01896 22 42 01"
-                                        onChange={(e) => setData('payment_method', e.target.value)}
-                                        className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
-                                    />
-                                    <label htmlFor="nagad" className="ml-3 block text-sm font-medium text-gray-700">Nagad (Merchant) (Payment) : 01896 22 42 01</label>
-                                </div>
-                                <div className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        id="cash_in_hand"
-                                        name="payment_method"
-                                        value="Cash in Hand (Office)"
-                                        onChange={(e) => setData('payment_method', e.target.value)}
-                                        className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
-                                    />
-                                    <label htmlFor="cash_in_hand" className="ml-3 block text-sm font-medium text-gray-700">Cash in Hand (Office)</label>
-                                </div>
-                                <div className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        id="rocket"
-                                        name="payment_method"
-                                        value="Rocket (Send Money) : 018304502805"
-                                        onChange={(e) => setData('payment_method', e.target.value)}
-                                        className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
-                                    />
-                                    <label htmlFor="rocket" className="ml-3 block text-sm font-medium text-gray-700">Rocket (Send Money) : 018304502805</label>
-                                </div>
+                                {paymentMethods.map((method) => (
+                                    <div className="flex items-center" key={method.id}>
+                                        <input
+                                            type="radio"
+                                            id={method.name}
+                                            name="payment_method"
+                                            value={`${method.name} : ${method.number}`}
+                                            onChange={(e) => setData('payment_method', e.target.value)}
+                                            className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300"
+                                            required
+                                        />
+                                        <label htmlFor={method.name} className="ml-3 block text-sm font-medium text-gray-700">{method.name} : {method.number}</label>
+                                    </div>
+                                ))}
                             </div>
                             {errors.payment_method && <div className="text-red-500 text-sm mt-1">{errors.payment_method}</div>}
                         </div>
@@ -258,8 +219,8 @@ export default function Registration() {
                                 required
                             >
                                 <option value="">ব্যাচ নির্বাচন করুন</option>
-                                {bach.map((course, index) => (
-                                    <option key={index} value={course}>{course}</option>
+                                {batches.map((batch) => (
+                                    <option key={batch.id} value={batch.name}>{batch.name}</option>
                                 ))}
                             </select>
                             {errors.course_interested && <div className="text-red-500 text-sm mt-1">{errors.course_interested}</div>}
@@ -290,8 +251,8 @@ export default function Registration() {
                                 required
                             >
                                 <option value="">Select a Representative</option>
-                                {representatives.map((rep, index) => (
-                                    <option key={index} value={rep}>{rep}</option>
+                                {representatives.map((rep) => (
+                                    <option key={rep.id} value={`${rep.name} - ${rep.number}`}>{rep.name} - {rep.number}</option>
                                 ))}
                             </select>
                             {errors.representative_name && <div className="text-red-500 text-sm mt-1">{errors.representative_name}</div>}
